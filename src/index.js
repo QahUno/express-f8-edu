@@ -1,13 +1,13 @@
-const express = require("express")
+const express = require('express')
 const { engine } = require('express-handlebars')
 const path = require('path')
 const route = require('./routes/index.route.js')
 
-const app = express();
+const app = express()
 
-const port = 3000;
+const port = 3000
 
-  app.use(
+app.use(
   express.urlencoded({
     extended: true,
   }),
