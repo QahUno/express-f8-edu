@@ -3,7 +3,7 @@ const newsRouter = require('./news.route.js')
 
 function route(app) {
   app.use('/news', newsRouter)
-  app.use('/', siteRouter)  // home, search, contact, etc.
+  app.use('/', siteRouter) // home, search, contact, etc.
 }
 
-module.exports = route
+  module.exports = route;
