@@ -1,2 +1,5 @@
 fill in select option (trg edit page)
 ui
+authentication
+apply jquery all
+optimize code, refactor

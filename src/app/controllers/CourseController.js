@@ -29,13 +29,13 @@ class CourseController {
             req.body.thumbnail = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`
             const newCourse = new Course(req.body)
             await newCourse.save()
-            res.redirect('/')
+            res.redirect('/me/stored/courses')
         } catch (err) {
             next(err)
         }
     }
 
-    // [GET] /:id/edit
+    // [GET] courses/:id/edit
     async edit(req, res, next) {
         try {
             const course = await Course.findById(req.params.id).lean()
@@ -45,7 +45,7 @@ class CourseController {
         }
     }
 
-    // [PUT] /:id
+    // [PUT] courses/:id
     async update(req, res, next) {
         try {
             await Course.findByIdAndUpdate(req.params.id, req.body)
@@ -55,13 +55,49 @@ class CourseController {
         }
     }
 
-    // [DELETE] /:id
+    // [DELETE] courses/:id
     async delete(req, res, next) {
-        try {
-            await Course.findByIdAndDelete(req.params.id)
-            res.redirect('back')
-        } catch (err) {
-            next(err)
+        await Course.deleteById(req.params.id)
+        res.redirect('back')
+    }
+
+    // [DELETE] courses/:id/force
+    async forceDelete(req, res, next) {
+        await Course.findByIdAndDelete(req.params.id)
+        res.redirect('back')
+    }
+
+    // [PATCH] courses/:id/restore
+    async restore(req, res, next) {
+        await Course.restore({ _id: req.params.id })
+        res.redirect('back')
+    }
+
+    // [POST] courses/handleChooseAllInCourses
+    async handleChooseAllInCourses(req, res, next) {
+        switch (req.body.action) {
+            case 'delete':
+                await Course.delete({ _id: { $in: req.body.courseIds } })
+                res.redirect('back')
+                break
+            default:
+                res.send('Invalid action!')
+        }
+    }
+
+    // [POST] courses/handleChooseAllInTrash
+    async handleChooseAllInTrash(req, res, next) {
+        switch (req.body.action) {
+            case 'restore':
+                await Course.restore({ _id: { $in: req.body.courseIds } })
+                res.redirect('back')
+                break
+            case 'delete':
+                await Course.deleteMany({ _id: { $in: req.body.courseIds } })
+                res.redirect('back')
+                break
+            default:
+                res.send('Invalid action!')
         }
     }
 }
