@@ -9,7 +9,7 @@ const Course = new Schema(
         name: { type: String, required: true },
         desc: { type: String, maxLength: 200 },
         videoId: { type: String, required: true },
-        level: { type: String, default: 'Cơ bản' },
+        level: { type: String },
         slug: { type: String, slug: 'name', unique: true },
         thumbnail: { type: String },
     },

@@ -47,6 +47,7 @@ class CourseController {
 
     // [PUT] courses/:id
     async update(req, res, next) {
+        req.body.thumbnail = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`
         try {
             await Course.findByIdAndUpdate(req.params.id, req.body)
             res.redirect('/me/stored/courses')

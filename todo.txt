@@ -3,3 +3,6 @@ ui
 authentication
 apply jquery all
 optimize code, refactor
+them modal confirm permanent delete in choose all checbox
+text in english
+sort cho trash lun

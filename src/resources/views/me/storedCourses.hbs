@@ -23,11 +23,29 @@
       <tr>
         <th></th>
         <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Video ID</th>
-        <th scope="col">Created At</th>
-        <th scope="col">Updated At</th>
-        <th scope="col" colspan="2">Level</th>
+        <th scope="col">
+          Name
+          {{{sortFilter 'name' _sort}}}
+        </th>
+        <th scope="col">
+          Video ID
+          {{{sortFilter 'videoId' _sort}}}
+        </th>
+        <th scope="col">
+          Level
+          {{{sortFilter 'level' _sort}}}
+        </th>
+        <th scope="col">
+          Created At
+          {{{sortFilter 'createdAt' _sort}}}
+        </th>
+        <th scope="col">
+          Updated At
+          {{{sortFilter 'updatedAt' _sort}}}
+        </th>
+        <th scope="col">
+          Feature
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -41,9 +59,9 @@
         <th scope="row">{{sum @index 1}}</th>
         <td>{{this.name}}</td>
         <td>{{this.videoId}}</td>
+        <td>{{this.level}}</td>
         <td>{{this.createdAt}}</td>
         <td>{{this.updatedAt}}</td>
-        <td>{{this.level}}</td>
         <td>
           <a href="/courses/{{this._id}}/edit">Edit</a>
           <a data-bs-toggle="modal" data-bs-target="#delete-course-modal" data-bs-id={{this._id}} href="">Delete</a>

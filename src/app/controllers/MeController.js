@@ -3,8 +3,16 @@ const Course = require('../models/Course.js')
 class MeController {
     // [GET] /me/stored/courses
     async storedCourses(req, res, next) {
+        // toi uu hay bo vao ham sau
         try {
-            const myCourses = await Course.find({}).lean()
+            let myCourses = await Course.find({}).lean()
+            if (req.query.hasOwnProperty('_sort')) {
+                myCourses = await Course.find({})
+                    .sort({
+                        [req.query.field]: req.query.type,
+                    })
+                    .lean()
+            }
             const trashCount = await Course.countWithDeleted({ deleted: true })
             res.render('me/storedCourses', {
                 myCourses,

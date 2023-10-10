@@ -27,7 +27,10 @@
         <th scope="col">Name</th>
         <th scope="col">Video ID</th>
         <th scope="col">Level</th>
-        <th scope="col" colspan="2">Deleted At</th>
+        <th scope="col">Deleted At</th>
+        <th scope="col">
+          Feature
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -44,7 +47,7 @@
         <td>{{this.level}}</td>
         <td>{{this.deletedAt}}</td>
         <td>
-          <a href="" data-id={{this._id}} class="restore-btn">Restore</a>
+          <a href="" data-id={{this._id}} class="restore-btn">Restore</a><br/>
           <a data-bs-toggle="modal" data-bs-target="#delete-course-modal" data-bs-id={{this._id}} href="">Delete</a>
         </td>
       </tr>
